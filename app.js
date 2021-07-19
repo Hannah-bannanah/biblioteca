@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.set("port", PORT); //sets listening port
 // parse requests
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // route to web or api 

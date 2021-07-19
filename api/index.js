@@ -6,7 +6,7 @@ const express = require ('express');
 // initialize api router
 const apiRouter = express.Router();
 // configure api router
-apiRouter.use(express.urlencoded());
+apiRouter.use(express.urlencoded({extended: true}));
 apiRouter.use(express.json());
 
 //start routing
