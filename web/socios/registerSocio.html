@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar socio</title>
+</head>
+<body>
+    <form action="/api/socios/register" method='post'>
+        <label for="nombre">Nombre</label>
+        <input type="text" name='nombre' id= 'nombre' required autofocus><br>
+        <label for="apellidos">Apellidos</label>
+        <input type="text" name="apellidos" id="apellidos" required><br>
+        <label for="nacionalidad">Nacionalidad</label>
+        <input type="text" name="nacionalidad" id="nacionalidad" required><br>
+        <label for="direccion">Direcci&oacute;n</label>
+        <input type="text" name="direccion" id="direccion" required><br>
+        <label for="tlf">Tel&eacute;fono</label>
+        <input type="tel" name="telefono" id="tlf" required><br>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required><br>
+        <input type="submit" name="registrarse" id="registrarse" value="Registrarse">
+    </form>
+</body>
+</html>
