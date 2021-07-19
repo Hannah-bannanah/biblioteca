@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "primera version de la aplicacion node de biblioteca",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hannah-bannanah/biblioteca.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",

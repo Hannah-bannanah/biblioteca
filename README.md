@@ -4,7 +4,7 @@ App de Abracabiblio
 ## About
 Author: Hannah-bannanah  
 License: MIT License  
-github: https://github.com/Hannah-bannanah/biblioteca  
+github: Hannah-bannanah/biblioteca  
 
 ## Requisitos
 - nodejs/npm
