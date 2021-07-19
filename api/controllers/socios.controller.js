@@ -26,6 +26,8 @@ function register (req, res, next) {
             data: result
         });
     });
+
 };
+
 
 module.exports = {register};

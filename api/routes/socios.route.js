@@ -13,6 +13,7 @@ route.get("/", (req, res) => {
     res.end();
 });
 
-route.post("/register", sociosController.register)
+route.post("/register", sociosController.register);
+//route.post("/login", sociosController.login);
 
 module.exports = route;
