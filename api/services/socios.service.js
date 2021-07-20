@@ -22,4 +22,33 @@ function register (data, callback) {
 
 };
 
-module.exports = {register};
+/* function login (data, callback) {
+    db.connect((err) => {
+        if(err) throw err;
+        console.log("Connected to DB")
+    });
+
+    const sql = `SELECT id_socio FROM users WHERE email = ? AND password = ?`;
+    db.query(sql, [data.email, data.password], (err, result, fields) => {
+        return;
+    });
+} */
+
+function login (data, callback) {
+    db.connect((err) => {
+        if(err) throw err;
+        console.log("Connected to DB")
+    });
+
+    const sql = `SELECT id_socio FROM socio WHERE email = ?`;
+    db.query(sql, [data.email], (err, result, fields) => {
+        if (err) return callback(err);
+        if (result.length > 0) {
+            return callback(null, "Login successful");
+        } else {
+            return callback("Invalid credentials");
+        }
+    });
+}
+
+module.exports = {register, login};

@@ -29,5 +29,22 @@ function register (req, res, next) {
 
 };
 
+function login (req, res, next) {
+    const data = {
+        email: req.body.email,
+        password: req.body.email
+    }
 
-module.exports = {register};
+    sociosService.login(data, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(400).send({success: 0, data: 'Bad request'});
+        };
+        return res.status(200).send({
+            success: 1,
+            data: result
+        });
+    });
+}
+
+module.exports = {register, login};

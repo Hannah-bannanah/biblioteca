@@ -14,6 +14,6 @@ route.get("/", (req, res) => {
 });
 
 route.post("/register", sociosController.register);
-//route.post("/login", sociosController.login);
+route.post("/login", sociosController.login);
 
 module.exports = route;

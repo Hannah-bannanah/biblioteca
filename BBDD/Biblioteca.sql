@@ -47,7 +47,7 @@ CREATE TABLE libro_autor (
     CONSTRAINT fk_autor FOREIGN KEY(id_autor) REFERENCES autor(id_autor) ON DELETE CASCADE
 );
 
-'''
+/*
 -- Comentada porque esta tabla no es necesaria aún 
 CREATE TABLE prestamo (
 	id_prestamo INT PRIMARY KEY AUTO_INCREMENT,
@@ -57,7 +57,7 @@ CREATE TABLE prestamo (
     id_socio INT REFERENCES socio(id_socio),
     libro_devuelto BOOLEAN NOT NULL
 );
-'''
+*/
 
 -- INSERCIONES EN TABLAS - ÁLVARO:
 INSERT INTO socio (nombre, apellidos, nacionalidad, direccion, telefono, email)
@@ -197,7 +197,7 @@ VALUES  ("9780099470465", 21),
         ("9788420471549", 25);
         
       
-'''  
+/*  
 -- QUERIES DE PRUEBA - ÁLVARO:     
      
 SELECT libro.titulo AS TÍTULO,
@@ -244,4 +244,4 @@ ON libro.isbn = libro_autor.isbn
 INNER JOIN autor
 ON autor.id_autor = libro_autor.id_autor
 WHERE libro.titulo = "Java 11: Los fundamentos del lenguaje Java (con ejercicios prácticos corregidos)";
-'''
+*/

@@ -25,8 +25,11 @@ webRouter.get("/home", (req, res) => {
     res.sendFile(path.join(__dirname, '/home/index.html'));
 });
 
-webRouter.get("/registerSocio", (req, res) => {
+webRouter.get("/socios/register", (req, res) => {
     res.sendFile(path.join(__dirname, '/socios/registerSocio.html'));
+});
+webRouter.get("/socios/login", (req, res) => {
+    res.sendFile(path.join(__dirname, '/socios/loginSocio.html'));
 });
 
 module.exports = webRouter;
