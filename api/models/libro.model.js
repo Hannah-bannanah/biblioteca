@@ -1,3 +1,4 @@
+const con = require('../config/db.config');
 const db = require('../config/db.config');
 
 // crear modelo libro
@@ -48,7 +49,7 @@ Libro.getBook = (isbn, result) => {
 }
 
 // metodo create
-Libro.create = (libro, result) => {
+/* Libro.create = (libro, result) => {
     let sql = `INSERT INTO libro SET ?`;
     db.query(sql, libro, (err, res) => {
         if (err) {
@@ -60,8 +61,54 @@ Libro.create = (libro, result) => {
         console.log("Libro añadido correctamente: ", {libro});
         result(null, {libro});
     })
-} 
+}  */
 
+// metodo create
+//TODO si existe ya, aumentar el numero de ejemplares
+Libro.create = (libro, id_autor, result) => {
+    db.beginTransaction((err) => {
+        if (err) {
+            console.log(err);
+            result(err, 'No se ha podido añadir el libro');
+            return;
+        }
+        db.query(`INSERT INTO libro SET ?`, libro, (err, res) => {
+            if (err) {
+                db.rollback(() => {
+                    console.log(err);
+                    result(err, 'No se ha podido añadir el libro');
+                    return;                   
+                });
+            }
+            
+            let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (${isbn}, ${id_autor})`;
+            db.query(sql, (err, res) => {
+                if (err) {
+                    db.rollback(() => {
+                        console.log(err);
+                        result(err, 'No se ha podido añadir el libro');
+                        return;                   
+                    });
+                }
+                db.commit((err) => {
+                    if (err) {
+                        db.rollback(() => {
+                            console.log(err);
+                            result(err, 'No se ha podido añadir el libro');
+                            return;                   
+                        });
+                    }
+                    
+                    console.log("Libro añadido correctamente: ", {libro});
+                    result(null, {libro});                    
+                });
+            
+            });
+        });       
+    });
+}
+
+//TODO eliminar registro de libro_autor
 Libro.delete = (isbn, result) => {
     let sql = `DELETE FROM libro WHERE isbn = ${isbn}`;
     db.query(sql, (err, res) => {

@@ -37,8 +37,10 @@ function create (req, res) {
         año_edicion: req.body.año_edicion
     });
 
+    const id_autor = req.body.id_autor;
+
     //call the create method in Libro
-    Libro.create(libro, (err, data) => {
+    Libro.create(libro, id_autor, (err, data) => {
         if (err) res.status(500).send({message:err.message || "No se ha añadido el libro"});
         else res.send(data);
     });
