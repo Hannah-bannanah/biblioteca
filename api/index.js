@@ -16,7 +16,7 @@ apiRouter.get("/", (req, res) => {
     res.end();
 });
 
-apiRouter.use("/socios", require("./routes/socios.route"));
+apiRouter.use("/socios", require("./routes/socio.route"));
 
 
 module.exports = apiRouter;

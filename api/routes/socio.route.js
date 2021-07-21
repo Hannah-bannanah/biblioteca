@@ -1,7 +1,7 @@
 /** Route for teh socios endpoint */
 // import necessary modules
 const express = require('express');
-const sociosController = require('../controllers/socios.controller');
+const socioController = require('../controllers/socio.controller');
 
 // initialize route
 const route = express.Router();
@@ -13,7 +13,7 @@ route.get("/", (req, res) => {
     res.end();
 });
 
-route.post("/register", sociosController.register);
-route.post("/login", sociosController.login);
+route.post("/register", socioController.register);
+//route.post("/login", socioController.login);
 
 module.exports = route;
