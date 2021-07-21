@@ -7,7 +7,7 @@ const socioController = require('../controllers/socio.controller');
 const route = express.Router();
 
 // routes for socios endpoint
-route.get("/", (req, res) => {
+route.get("/", (req, res, next) => {
     res.writeHead(200, {'Content-Type': 'text'});
     res.write("<h2>Hola socio!</h2>");
     res.end();
