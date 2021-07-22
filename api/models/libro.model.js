@@ -4,7 +4,7 @@ const db = require('../config/db.config');
 // crear modelo libro
 const Libro = function (libro) {
     this.isbn = libro.isbn;
-    this.titutlo = libro.titulo;
+    this.titulo = libro.titulo;
     this.id_editorial = libro.id_editorial;
     this.genero = libro.genero;
     this.ejemplares = libro.ejemplares;
@@ -14,7 +14,7 @@ const Libro = function (libro) {
 }
 
 // metodo getAll 
-Libro.getAll = result => {
+Libro.listBooks = result => {
     let sql = `SELECT * FROM libro`;
     db.query(sql, (err, res) => {
         if (err) {
@@ -49,48 +49,35 @@ Libro.getBook = (isbn, result) => {
 }
 
 // metodo create
-/* Libro.create = (libro, result) => {
-    let sql = `INSERT INTO libro SET ?`;
-    db.query(sql, libro, (err, res) => {
-        if (err) {
-            console.log(err);
-            result(err, 'No se ha podido añadir el libro');
-            return;
-        }
-
-        console.log("Libro añadido correctamente: ", {libro});
-        result(null, {libro});
-    })
-}  */
-
-// metodo create
-//TODO si existe ya, aumentar el numero de ejemplares
 Libro.create = (libro, id_autor, result) => {
-    db.beginTransaction((err) => {
+    // si el isbn ya existe, aumentar el número de ejemplares
+    db.query(`SELECT isbn FROM libro WHERE isbn = ${libro.isbn}`, (err, res) => {
         if (err) {
             console.log(err);
             result(err, 'No se ha podido añadir el libro');
             return;
         }
-        db.query(`INSERT INTO libro SET ?`, libro, (err, res) => {
-            if (err) {
-                db.rollback(() => {
+        if (res.length) {
+            console.log("El libro ya existe: ", res);
+            db.query(`UPDATE libro SET ejemplares = ejemplares + ${libro.ejemplares}`, (err, res) => {
+                if (err) {
                     console.log(err);
                     result(err, 'No se ha podido añadir el libro');
-                    return;                   
-                });
-            }
-            
-            let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (${isbn}, ${id_autor})`;
-            db.query(sql, (err, res) => {
-                if (err) {
-                    db.rollback(() => {
-                        console.log(err);
-                        result(err, 'No se ha podido añadir el libro');
-                        return;                   
-                    });
+                    return;
                 }
-                db.commit((err) => {
+                console.log("Aumentado el numero de ejemplares: ", {res});
+                result(null, {res});  
+                return;
+            });
+        } else {
+            // si no existe, crear un registro nuevo
+            db.beginTransaction((err) => {
+                if (err) {
+                    console.log(err);
+                    result(err, 'No se ha podido añadir el libro');
+                    return;
+                }
+                db.query(`INSERT INTO libro SET ?`, libro, (err, res) => {
                     if (err) {
                         db.rollback(() => {
                             console.log(err);
@@ -99,12 +86,33 @@ Libro.create = (libro, id_autor, result) => {
                         });
                     }
                     
-                    console.log("Libro añadido correctamente: ", {libro});
-                    result(null, {libro});                    
-                });
-            
-            });
-        });       
+                    let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (${libro.isbn}, ${id_autor})`;
+                    db.query(sql, (err, res) => {
+                        if (err) {
+                            db.rollback(() => {
+                                console.log(err);
+                                result(err, 'No se ha podido añadir el libro');
+                                return;                   
+                            });
+                        }
+                        db.commit((err) => {
+                            if (err) {
+                                db.rollback(() => {
+                                    console.log(err);
+                                    result(err, 'No se ha podido añadir el libro');
+                                    return;                   
+                                });
+                            }
+                            
+                            console.log("Libro añadido correctamente: ", {libro});
+                            result(null, {libro});                    
+                        });
+                    
+                    });
+                });       
+            }); 
+        }
+    
     });
 }
 
