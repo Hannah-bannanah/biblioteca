@@ -6,7 +6,7 @@ const libroController = require('../controllers/libro.controller');
 const route = express.Router();
 
 // routes for libros endpoint
-route.get("/", libroController.getAll);
+route.get("/", libroController.listBooks);
 route.get("/:isbn", libroController.getBook);
 
 route.post("/create", libroController.create);

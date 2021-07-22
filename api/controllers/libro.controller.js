@@ -2,8 +2,8 @@
 const Libro = require('../models/libro.model');
 
 // mostrar todos
-function getAll (req, res) {
-    Libro.getAll((err, data) => {
+function listBooks (req, res) {
+    Libro.listBooks((err, data) => {
         if (err) res.status(500).send({message: err.message || 'No se ha podido obtener la lista de libros'});
         else res.send(data);
     }) 
@@ -28,17 +28,16 @@ function create (req, res) {
     // create libro object
     const libro = new Libro({
         isbn: req.body.isbn,
-        titutlo: req.body.titulo,
+        titulo: req.body.titulo,
         id_editorial: req.body.id_editorial,
         genero: req.body.genero,
-        ejemplares: req.body.ejemplares,
+        ejemplares: 1,
         idioma: req.body.idioma,
         numero_paginas: req.body.numero_paginas,
         año_edicion: req.body.año_edicion
     });
 
     const id_autor = req.body.id_autor;
-
     //call the create method in Libro
     Libro.create(libro, id_autor, (err, data) => {
         if (err) res.status(500).send({message:err.message || "No se ha añadido el libro"});
@@ -58,4 +57,4 @@ function deleteBook (req, res) {
     })
 }
 
-module.exports = {getAll, getBook, create, deleteBook};
+module.exports = {listBooks, getBook, create, deleteBook};
