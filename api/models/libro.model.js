@@ -1,7 +1,7 @@
 const con = require('../config/db.config');
 const db = require('../config/db.config');
 
-// crear modelo libro
+// crear modelo de libro
 const Libro = function (libro) {
     this.isbn = libro.isbn;
     this.titulo = libro.titulo;
