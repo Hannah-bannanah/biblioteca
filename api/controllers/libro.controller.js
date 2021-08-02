@@ -54,7 +54,7 @@ function deleteBook (req, res) {
         } else {
             res.send({message: "Libro eliminado con exito"});
         }
-    })
+    });
 }
 
 module.exports = {listBooks, getBook, create, deleteBook};
