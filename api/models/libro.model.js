@@ -15,7 +15,8 @@ const Libro = function (libro) {
 
 // metodo getAll 
 Libro.listBooks = result => {
-    let sql = `SELECT * FROM libro`;
+    // let sql = `SELECT * FROM libro `;
+    let sql = `select l.isbn, l.titulo, e.nombre as editorial, l.genero, l.ejemplares, l.idioma, l.numero_paginas, l.año_edicion, a.nombre as nombreAutor, a.apellidos as apellidosAutor from libro as l join libro_autor on l.isbn = libro_autor.isbn join autor as a on libro_autor.id_autor = a.id_autor join editorial as e on l.id_editorial = e.id_editorial;`
     db.query(sql, (err, res) => {
         if (err) {
             console.log(err);
@@ -30,7 +31,7 @@ Libro.listBooks = result => {
 
 // metodo getBook
 Libro.getBook = (isbn, result) => {
-    let sql = `SELECT * FROM libro WHERE isbn = ${isbn}`;
+    let sql = `select l.isbn, l.titulo, e.nombre as editorial, l.genero, l.ejemplares, l.idioma, l.numero_paginas, l.año_edicion, a.nombre as nombreAutor, a.apellidos as apellidosAutor from libro as l join libro_autor on l.isbn = libro_autor.isbn join autor as a on libro_autor.id_autor = a.id_autor join editorial as e on l.id_editorial = e.id_editorial WHERE l.isbn = ${isbn}`;
     db.query(sql, (err, res) => {
         if (err) {
             console.log(err);
@@ -44,7 +45,9 @@ Libro.getBook = (isbn, result) => {
             return;
         }
 
-        result({kind: "not found"}, null);
+        result({
+            kind: "not found"
+        }, null);
     })
 }
 
@@ -65,8 +68,12 @@ Libro.create = (libro, id_autor, result) => {
                     result(err, 'No se ha podido añadir el libro');
                     return;
                 }
-                console.log("Aumentado el numero de ejemplares: ", {res});
-                result(null, {res});  
+                console.log("Aumentado el numero de ejemplares: ", {
+                    res
+                });
+                result(null, {
+                    res
+                });
                 return;
             });
         } else {
@@ -82,17 +89,17 @@ Libro.create = (libro, id_autor, result) => {
                         db.rollback(() => {
                             console.log(err);
                             result(err, 'No se ha podido añadir el libro');
-                            return;                   
+                            return;
                         });
                     }
-                    
+
                     let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (${libro.isbn}, ${id_autor})`;
                     db.query(sql, (err, res) => {
                         if (err) {
                             db.rollback(() => {
                                 console.log(err);
                                 result(err, 'No se ha podido añadir el libro');
-                                return;                   
+                                return;
                             });
                         }
                         db.commit((err) => {
@@ -100,19 +107,23 @@ Libro.create = (libro, id_autor, result) => {
                                 db.rollback(() => {
                                     console.log(err);
                                     result(err, 'No se ha podido añadir el libro');
-                                    return;                   
+                                    return;
                                 });
                             }
-                            
-                            console.log("Libro añadido correctamente: ", {libro});
-                            result(null, {libro});                    
+
+                            console.log("Libro añadido correctamente: ", {
+                                libro
+                            });
+                            result(null, {
+                                libro
+                            });
                         });
-                    
+
                     });
-                });       
-            }); 
+                });
+            });
         }
-    
+
     });
 }
 
@@ -127,7 +138,9 @@ Libro.delete = (isbn, result) => {
         }
 
         if (res.affectedRows == 0) {
-            result({kind: "not found"}, null);
+            result({
+                kind: "not found"
+            }, null);
             return;
         }
 
