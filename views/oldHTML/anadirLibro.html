@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>A&ntilde;adir Libro</title>
+    </head>
+    <body>
+        <form action="/php/anadirLibro.php" method="post">
+            <fieldset>
+                <legend>Login info</legend>
+                <label for="dbuser">Username</label><br>
+                <input type="text" name="user" id="dbuser" required autofocus placeholder="user"><br>
+                <label for="dbpsswd">Password</label><br>
+                <input type="password" name="psswd" id="dbpsswd" required>
+            </fieldset>
+            <fieldset>
+                <legend>Detalles del libro</legend>
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" id="isbn" required placeholder="isbn"><br>
+                <label for="titulo">T&iacute;tulo</label>
+                <input type="text" name="titulo" id="titulo" required placeholder="t&iacute;tulo"><br>
+                <!--label for="editorial">Editorial</label>
+                <input type="text" name="editorial" id="editorial" placeholder="editorial"-->
+                <label for="genero">G&eacute;nero</label>
+                <input type="text" name="genero" id="genero" placeholder="genero"><br>
+                <label for="idioma">Idioma</label>
+                <input type="idioma" name="idioma" id="idioma" placeholder="idioma"><br>
+                <label for="anyoEdicion">A&ntilde;o de edici&oacute;</label>
+                <input type="number" id="anyoEdicion" name="anyoEdicion" placeholder="0"><br>
+                <label for="numPag">N&uacute;mero de p&aacute;ginas</label>
+                <input type="number" name="numPag" id="numPag" placeholder="0">
+            </fieldset>
+            <input type="submit" name="submit" id="submitLibro" value="A&ntilde;adir Libro">
+        </form>
+    </body>
+</html>

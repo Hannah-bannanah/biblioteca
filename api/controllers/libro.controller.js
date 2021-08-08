@@ -43,17 +43,29 @@ function create(req, res) {
         req.body.genero,
         req.body.ejemplares,
         req.body.idioma,
-        req.body.numero_paginas,
-        req.body.año_edicion
+        req.body.numPaginas,
+        req.body.anio
     );
 
     const id_autor = req.body.id_autor;
-    //call the create method in Libro
+    // //call the create method in Libro
+    // libro.create(id_autor, (err, data) => {
+    //     if (err) res.status(500).send({
+    //         message: err.message || "No se ha añadido el libro 0"
+    //     });
+    //     else res.send(data);
+    // });
+
+    // call the create method in Libro
     libro.create(id_autor, (err, data) => {
-        if (err) res.status(500).send({
-            message: err.message || "No se ha añadido el libro"
-        });
-        else res.send(data);
+        if (err) {
+            res.render('errors/generalError', {
+                errorCode: 500,
+                errorMessage: err.message
+            });
+        } else {
+            res.redirect('/registerBook');
+        };
     });
 }
 

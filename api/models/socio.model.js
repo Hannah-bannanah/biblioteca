@@ -1,4 +1,6 @@
-const db = require('../config/db.config');
+// const db = require('../../util/db.config');
+const db = require('../../util/dbconfig')
+
 
 //Crear modelo Socio
 const Socio = function (socio) {
@@ -14,14 +16,20 @@ const Socio = function (socio) {
 Socio.register = (newSocio, result) => {
     let sql = "INSERT INTO socio SET ?";
     db.query(sql, newSocio, (err, res) => {
-        if(err) {
+        if (err) {
             console.log(err);
             result(err, null);
             return;
         }
 
-        console.log("Socio creado: ", {socio_id: res.insertId, ...newSocio});
-        result(null, {socio_id:res.insertId, ...newSocio});
+        console.log("Socio creado: ", {
+            socio_id: res.insertId,
+            ...newSocio
+        });
+        result(null, {
+            socio_id: res.insertId,
+            ...newSocio
+        });
     })
 
 }
