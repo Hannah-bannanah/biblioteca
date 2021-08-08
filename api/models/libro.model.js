@@ -1,5 +1,5 @@
-const con = require('../config/db.config');
-const db = require('../config/db.config');
+// const db = require('../../util/db.config');
+const db = require('../../util/dbconfig')
 
 class Libro {
     constructor(isbn, titulo, id_editorial, genero, ejemplares, idioma, numero_paginas, año_edicion) {
@@ -50,11 +50,11 @@ class Libro {
 
     create(id_autor, callback) {
         // si el isbn ya existe, aumentar el número de ejemplares
-        db.query(`SELECT isbn FROM libro WHERE isbn = ${this.isbn}`, (err, res) => {
+        db.query(`SELECT isbn FROM libro WHERE isbn = ?`, this.isbn, (err, res) => {
             console.log(this.isbn);
             if (err) {
                 console.log(err);
-                callback(err, 'No se ha podido añadir el libro');
+                callback(err, 'No se ha podido añadir el libro 1');
                 return;
             }
             if (res.length) {
@@ -62,7 +62,7 @@ class Libro {
                 db.query(`UPDATE libro SET ejemplares = ejemplares + ${this.ejemplares}`, (err, res) => {
                     if (err) {
                         console.log(err);
-                        callback(err, 'No se ha podido añadir el libro');
+                        callback(err, 'No se ha podido añadir el libro 2');
                         return;
                     }
                     console.log("Aumentado el numero de ejemplares: ", {
@@ -78,24 +78,24 @@ class Libro {
                 db.beginTransaction((err) => {
                     if (err) {
                         console.log(err);
-                        callback(err, 'No se ha podido añadir el libro');
+                        callback(err, 'No se ha podido añadir el libro 3');
                         return;
                     }
                     db.query(`INSERT INTO libro SET ?`, this, (err, res) => {
                         if (err) {
                             db.rollback(() => {
                                 console.log(err);
-                                callback(err, 'No se ha podido añadir el libro');
+                                callback(err, 'No se ha podido añadir el libro 4');
                                 return;
                             });
                         }
 
-                        let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (${this.isbn}, ${id_autor})`;
-                        db.query(sql, (err, res) => {
+                        let sql = `INSERT INTO libro_autor (isbn, id_autor) VALUES (?, ?)`;
+                        db.query(sql, [this.isbn, id_autor], (err, res) => {
                             if (err) {
                                 db.rollback(() => {
                                     console.log(err);
-                                    callback(err, 'No se ha podido añadir el libro');
+                                    callback(err, 'No se ha podido añadir el libro 5');
                                     return;
                                 });
                             }
@@ -103,7 +103,7 @@ class Libro {
                                 if (err) {
                                     db.rollback(() => {
                                         console.log(err);
-                                        callback(err, 'No se ha podido añadir el libro');
+                                        callback(err, 'No se ha podido añadir el libro 6');
                                         return;
                                     });
                                 }

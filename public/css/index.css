@@ -1,0 +1,98 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Roboto Condensed', sans-serif;
+    font-size: 10px;
+    background-color: #F9F7F7;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /*grid-template-rows: 3fr 1fr 4fr 2fr;*/
+    grid-template-areas: "header header header header"
+                         "nav nav nav nav"
+                         "main main main main"
+                         "footer footer footer footer";
+}
+
+header {
+    grid-area: header;
+    height: 15vh;
+    width: 100vw;
+    background-color: #112D4E;
+    color: #DBE2EF;
+    font-size: x-large;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    padding-top: 5vh;
+}
+
+nav {
+    grid-area: nav;
+    background-color: #3F72AF;
+    height: 40px;
+}
+
+
+.navbar {
+    list-style: none;
+    float: right;
+    height: 100%;
+}
+
+.navbar li {
+    float:left;
+    height: 100%;
+}
+
+.navbar a {
+    color: #F9F7F7;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-variant: small-caps;
+    font-size: 18px;
+    line-height: 40px;
+    padding: 9px;
+}
+
+.navbar a:visited {
+    color: #F9F7F7;
+}
+
+.navbar a:focus, .navbar a:hover {
+    background-color: #DBE2EF;
+    color: #112D4E;
+}
+
+main {
+    grid-area: main;
+    padding: 3%;
+}
+
+footer {
+    grid-area: footer;
+    height: 10vh;
+    width: 100vw;
+    background-color: #112D4E;
+    color: #DBE2EF;
+    bottom:0;
+    position: absolute;
+}
+
+aside {
+    display: none;
+}
+
+img {
+    height: 50vh;
+    display: block;
+    margin: 0 auto;
+}
