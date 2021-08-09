@@ -1,13 +1,12 @@
 const db = require('../util/db.config');
 
 module.exports = class Libro {
-    constructor(isbn, titulo, id_editorial, genero, idioma, anyo_edicion, numero_paginas, ejemplares) {
+    constructor(isbn, titulo, id_editorial, genero, idioma, numero_paginas, ejemplares) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.id_editorial = id_editorial;
         this.genero = genero;
         this.idioma = idioma;
-        this.anyo_edicion = anyo_edicion;
         this.numero_paginas = numero_paginas;
         this.ejemplares = ejemplares;
     }
@@ -16,80 +15,78 @@ module.exports = class Libro {
         return db.execute('SELECT * FROM libro');
     }
 
-    static getLibro(isbn) {
+    static getBook(isbn) {
         return db.execute('SELECT * FROM libro WHERE libro.isbn = ?', [isbn]);
     }
 
     static bookExists(isbn) {
-        const output = false;
-        Libro.getLibro('9788497932950').then(result => {
+        return Libro.getBook(isbn).then(result => {
             if (result[0].length > 0) return true;
-            else return false;
+            else return false
         });
     }
 
-    addLibro2() {
-        bookExists(this.isbn).then(result => console.log(result))
-    }
-
-    addLibro() {
-        console.log("adding libro");
-        // check whether the book exists before inserting
-        Libro.getLibro(this.isbn)
-            .then((result) => {
-                console.log("getting libro");
-                // if (result[0].length > 0) {
-                // if the book exist
-                console.log("book already exists");
-                return result;
-                // } else {
-                //     console.log("brand new record");
-                //     // add the book to the database
-                //     const q = 'INSERT INTO libro (isbn, titulo, id_editorial, genero, idioma, año_edicion, numero_paginas, ejemplares) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-                //     const values = [
-                //         this.isbn,
-                //         this.titulo,
-                //         this.id_editorial,
-                //         this.genero,
-                //         this.idioma,
-                //         this.anyo_edicion,
-                //         this.numero_paginas,
-                //         this.ejemplares
-                //     ];
-
-                //     return db.execute(q, values);
-                // }
-            })
-            .catch(err => console.log(err));
-
-    }
-
-    updateLibro() {
-        Libro.getLibro(this.isbn)
-            .then(([result]) => {
-                if (result.length > 0) {
-                    // update book in DB
-                    const q = 'UPDATE libro SET titulo = ?, id_editorial = ?, genero = ?, idioma = ?, año_edicion = ?, numero_paginas = ?, ejemplares = ? WHERE isbn = ?'
+    static addBook(libro, id_autor) {
+        return Libro.bookExists(libro.isbn).then(result => {
+                if (result) {
+                    return libro.updateBook(libro);
+                } else {
+                    // TODO actualizar todas las tablas (rollback si hay error)
+                    // add the book to the database
+                    const q = 'INSERT INTO libro (isbn, titulo, id_editorial, genero, idioma, numero_paginas, ejemplares) VALUES (?, ?, ?, ?, ?, ?, ?)';
                     const values = [
-                        this.titulo,
-                        this.id_editorial,
-                        this.genero,
-                        this.idioma,
-                        this.anyo_edicion,
-                        this.numero_paginas,
-                        this.ejemplares,
-                        this.isbn
+                        libro.isbn,
+                        libro.titulo,
+                        libro.id_editorial,
+                        libro.genero,
+                        libro.idioma,
+                        libro.numero_paginas,
+                        libro.ejemplares
                     ];
 
-                    return db.execute(q, values);
-
-                } else {
-                    return {
-                        success: 0,
-                        message: "could not find book"
-                    };
+                    // return db.execute(q, values);
+                    return db.execute(q, values).then(result => {
+                        return {
+                            result: result,
+                            success: 1,
+                            action: 'create'
+                        }
+                    });
                 }
-            });
+            })
+            .catch(err => console.log(err));
+    }
+
+    updateBook(libro) {
+        return Libro.bookExists(this.isbn).then(result => {
+            if (!result) {
+                return {
+                    success: 0,
+                    bookExists: false,
+                    message: 'isbn not found'
+                }
+            } else {
+                // update the book in the database
+                const q = `UPDATE libro SET titulo = ?, id_editorial = ?, genero = ?, idioma = ?, numero_paginas = ?, ejemplares = ? WHERE isbn = ?`
+                const values = [
+                    libro.titulo,
+                    libro.id_editorial,
+                    libro.genero,
+                    libro.idioma,
+                    libro.numero_paginas,
+                    libro.ejemplares,
+                    this.isbn
+                ];
+
+                return db.execute(q, values).then(result => {
+                    return {
+                        result: result,
+                        success: 1,
+                        action: 'update'
+                    }
+                });;
+            }
+        })
     }
 
     removeLibro() {

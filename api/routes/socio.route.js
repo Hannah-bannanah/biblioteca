@@ -1,19 +1,26 @@
 /** Route for teh socios endpoint */
 // import necessary modules
 const express = require('express');
+const path = require('path');
 const socioController = require('../controllers/socio.controller');
 
 // initialize route
-const route = express.Router();
+const router = express.Router();
 
 // routes for socios endpoint
-route.get("/", (req, res, next) => {
-    res.writeHead(200, {'Content-Type': 'text'});
+router.get("/", (req, res, next) => {
+    res.writeHead(200, {
+        'Content-Type': 'text'
+    });
     res.write("<h2>Hola socio!</h2>");
     res.end();
 });
 
-route.post("/register", socioController.register);
+router.get("/registerSocio", (req, res) => {
+    res.sendFile(path.join(__dirname, '../../views/socios/registerSocio.html'));
+});
+
+router.post("/registerSocio", socioController.register);
 //route.post("/login", socioController.login);
 
-module.exports = route;
+module.exports = router;

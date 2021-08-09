@@ -1,7 +1,11 @@
 <%- include('../includes/head.ejs') %>
+<script src="../js/jquery.validate.min.js"></script>
+<!--vinculamos el plugin de jquery para que funcione la validación-->
+<script src="../js/registroEjemplar.js"></script>
+<!--Vinculamos la hoja donde añadiremos los scripts-->
 <%- include('../includes/header.ejs') %>
 
-<form action='/api/libros/create' method='post'>
+<form action='/libros/registerBook' method='post'>
     <label for="titulo">T&iacute;tulo</label>
     <input type="text" id='titulo' name='titulo' required autofocus><br>
 
@@ -25,10 +29,6 @@
 
     <label for="numPaginas">Número de páginas</label>
     <input type="number" name="numPaginas" id="numPaginas" min="1" required><br>
-
-    <label for="anio">Año de edición</label>
-    <input type="number" name="anio" id="anio" required><br>
-
 
     <input type="submit" name="registrar" id="registrar" value="Registrar">
 </form>

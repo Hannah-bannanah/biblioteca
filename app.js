@@ -3,6 +3,11 @@
 const express = require('express');
 const path = require('path');
 
+// import internal modules
+const errorController = require('./controllers/error.controller');
+const librosRouter = require('./routes/libro.route');
+const sociosRouter = require('./api/routes/socio.route');
+
 // initialize app
 const app = express();
 // configure basic app parameters
@@ -20,11 +25,28 @@ app.set('views', 'views'); //set up the views folder
 // set up the static giles folder (css)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// route to web or api 
-app.use("/api", require('./api'));
+// reroute appropriately
+app.use("/api/socios", sociosRouter);
+// app.use("/api", require('./api'));
+app.use("/libros", librosRouter);
 
-app.use("/", require('./web'));
-app.use(express.static('web'));
+
+app.get("/home", (req, res, next) => {
+    res.render("home/index", {
+        pageTitle: 'ABRACABIBLIO',
+        path: '/'
+    });
+});
+
+app.get("/", (req, res, next) => {
+    res.render("home/index", {
+        pageTitle: 'ABRACABIBLIO',
+        path: '/'
+    });
+});
+
+//default route
+app.use(errorController.error);
 
 // listen on port
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
