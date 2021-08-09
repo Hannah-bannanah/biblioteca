@@ -34,7 +34,7 @@ button {
 }
 
 /*Formato del header*/
-header {
+/* header {
     grid-area: header;
     height: 15vh;
     width: 100vw;
@@ -43,15 +43,17 @@ header {
     font-size: 3em;
     text-align: center;
     position: relative;
-}
+} */
 
+/*
 header h1 {
     line-height: 15vh;
 }
 
 header img {
-    width: 30px;
-}
+    width: 30px; 
+}*/
+
 
 /*Formato de la barra de navegación*/
 nav {
