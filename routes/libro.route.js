@@ -10,6 +10,7 @@ const router = express.Router();
 // });
 
 router.get("/", libroController.getCatalogo);
+router.get("/catalogo", libroController.getCatalogo);
 
 router.get('/listaLibros', libroController.getLibros);
 

@@ -7,95 +7,18 @@
 <script src="/js/catalogo.js"></script>
 <%- include('../includes/header.ejs') %>
 <main class="subgrid">
+    <% for (let libro of libros) { %>
     <article class="libro">
         <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
                 title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
+        <h3><%= libro.titulo %></h3>
+        <p>Autor</p>
         <details>
             <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
+            <%= libro.sinopsis %>
         </details>
     </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
-
-    <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
-        <h3>La historia interminable</h3>
-        <p>Michael Ende</p>
-        <details>
-            <summary>Sinopsis</summary>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure
-            eum! Illum architecto inventore sint labore?
-        </details>
-    </article>
+    <% } %>
     <section id="carrousel-libros" class="modal-box">
         <button id="cerrar-carrousel" onclick="cerrarParent('cerrar-carrousel')"><i class="far fa-times-circle fa-3x"
                 title="cerrar carrousel"></i></button>
@@ -103,310 +26,37 @@
                 title="libro anterior"></i></button>
         <button id="next-book" onclick="siguienteLibro(1)"><i class="fa fa-chevron-right fa-3x" aria-hidden="true"
                 title="libro siguiente"></i></button>
+        <% for (let libro of libros) { %>
         <article class="libro carrousel slide">
             <i class="fas fa-book fa-8x"></i>
-            <h3>1 La historia interminable</h3>
-            <p>Michael Ende</p>
+            <h3><%= libro.titulo %></h3>
+            <p>Autor</p>
             <details>
                 <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
+                <%= libro.sinopsis %>
             </details>
             <table class="ficha-libro">
                 <tbody>
                     <tr>
                         <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
+                        <td><%= libro.genero %></td>
                     </tr>
                     <tr>
                         <th>Autor</th>
-                        <td>Michael Ende</td>
+                        <td>autor</td>
                     </tr>
                     <tr>
                         <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
+                        <td>‎ editorial</td>
                     </tr>
                     <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
+                        <th>ISBN</th>
+                        <td><%= libro.isbn %></td>
                     </tr>
                 </tbody>
             </table>
         </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>2 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>3 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>4 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>5 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>6 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>7 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
-            <h3>8 La historia interminable</h3>
-            <p>Michael Ende</p>
-            <details>
-                <summary>Sinopsis</summary>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur
-                iure eum! Illum architecto inventore sint labore?
-            </details>
-            <table class="ficha-libro">
-                <tbody>
-                    <tr>
-                        <th>G&eacute;nero</th>
-                        <td>Fantas&iacute;a</td>
-                    </tr>
-                    <tr>
-                        <th>Autor</th>
-                        <td>Michael Ende</td>
-                    </tr>
-                    <tr>
-                        <th>Editorial</th>
-                        <td>‎ Santillana Educación, S.L.; N.º 1 edición (13 mayo 2016)</td>
-                    </tr>
-                    <tr>
-                        <th>Edici&oacute;n</th>
-                        <td>Tapa blanda</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-10</th>
-                        <td>849122078X</td>
-                    </tr>
-                    <tr>
-                        <th>ISBN-13</th>
-                        <td>978-8491220787</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
+        <% } %>
     </section>
 </main>
 <aside id="aside-cookies">
