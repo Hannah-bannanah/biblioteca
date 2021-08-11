@@ -3,56 +3,51 @@
 
 <main>
     <h1>Lista de todos los libros</h1>
-    <% if (books.length > 0) { %>
+    <% if (libros.length > 0) { %>
     <ul>
-        <% for (let book of books) { %>
+        <% for (let libro of libros) { %>
         <li>
             <table>
                 <tr>
                     <th>isbn</th>
-                    <td><%= book.isbn %></td>
+                    <td><%= libro.isbn %></td>
                 </tr>
                 <tr>
                     <th>titulo</th>
-                    <td><%= book.titulo %></td>
+                    <td><%= libro.titulo %></td>
 
                 </tr>
                 <tr>
                     <th>editorial</th>
-                    <td><%= book.id_editorial %></td>
+                    <td>Editorial</td>
 
                 </tr>
                 <tr>
                     <th>g&eacute;nero</th>
-                    <td><%= book.genero %></td>
+                    <td><%= libro.genero %></td>
 
                 </tr>
                 <tr>
                     <th>ejemplares</th>
-                    <td><%= book.ejemplares %></td>
+                    <td><%= libro.ejemplares %></td>
 
                 </tr>
                 <tr>
                     <th>idioma</th>
-                    <td><%= book.idioma %></td>
-
-                </tr>
-                <tr>
-                    <th>n&uacute;mero de p&aacute;ginas</th>
-                    <td><%= book.numero_paginas %></td>
-
-                </tr>
-                <tr>
-                    <th>a&ntilde;o de edici&oacute;n</th>
-                    <td><%= book.año_edicion %></td>
+                    <td><%= libro.idioma %></td>
 
                 </tr>
             </table>
+            <a href="/libros/editBook/<%= libro.isbn %>">Edit</a>
+            <form action="/libros/deleteBook" method='POST'>
+                <button type="submit">Delete</button>
+                <input type="hidden" name="isbn" value="<%= libro.isbn %>">
+            </form>
         </li>
         <% } // end of for %>
     </ul>
     <% } else { %>
-    <h2>No books for you!</h2>
+    <h2>No libros for you!</h2>
     <% } // end of if %>
 </main>
 <%- include('../includes/footer.ejs') %>

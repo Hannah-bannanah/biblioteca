@@ -9,34 +9,25 @@ const router = express.Router();
 //     res.sendFile(path.join(__dirname, '../views/catalogo/catalogo.html'));
 // });
 
-router.get("/", (req, res, next) => {
-    res.render("catalogo/catalogo", {
-        pageTitle: 'Catalogo',
-        path: '/libros/catalogo'
-    })
-});
+router.get("/", libroController.getCatalogo);
 
-router.get('/listaLibros', libroController.getAll);
-// router.get('/:isbn', libroController.getByIsbn);
+router.get('/listaLibros', libroController.getLibros);
 
-router.get("/registerBook", (req, res, next) => {
-    res.render("catalogo/actualizacionEjemplar", {
-        pageTitle: 'Registrar Libro',
-        path: '/libros/registerBook'
-    });
-});
+router.get("/registerBook", libroController.getCreateLibro);
 
-router.post('/registerBook', libroController.addBook)
+router.post('/registerBook', libroController.postCreateLibro)
 
 
-router.get("/editBook", (req, res, next) => {
-    res.render("catalogo/actualizacionEjemplar", {
-        pageTitle: 'Editar Libro',
-        path: '/libros/editeBook'
-    });
-});
+router.get("/editBook", libroController.getEditLibro);
+router.get("/editBook/:isbn", libroController.getEditLibro);
 
-router.post('/editBook', libroController.updateBook)
+
+router.post('/editBook', libroController.postEditLibro);
+
+router.post('/deleteBook', libroController.postDeleteLibro);
+
+router.get('/:isbn', libroController.getLibro);
+
 
 
 module.exports = router;
