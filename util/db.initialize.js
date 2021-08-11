@@ -65,6 +65,84 @@ const fillDB = () => {
                 },
             ]);
         })
+        .then(() => {
+            return Editorial.findByPk(1);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9781491999837",
+                titulo: "Angular: Up and Running",
+                genero: "Informática",
+                ejemplares: 1,
+                idioma: "Inglés",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
+        .then(() => {
+            return Editorial.findByPk(1);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9781449393199",
+                titulo: "CSS: The Definitive Guide",
+                genero: "Informática",
+                ejemplares: 1,
+                idioma: "Inglés",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
+        .then(() => {
+            return Editorial.findByPk(2);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9788480046589",
+                titulo: "Fórmulas y tablas estadísticas",
+                genero: "Estadística",
+                ejemplares: 1,
+                idioma: "Castellano",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
+        .then(() => {
+            return Editorial.findByPk(3);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9788484531643",
+                titulo: "Gramática de la fantasia: Introducción al arte de contar historias",
+                genero: "Psicología",
+                ejemplares: 1,
+                idioma: "Castellano",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
+        .then(() => {
+            return Editorial.findByPk(4);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9780099470465",
+                titulo: "Catch-22",
+                genero: "Comedia",
+                ejemplares: 1,
+                idioma: "Inglés",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
+        .then(() => {
+            return Editorial.findByPk(5);
+        })
+        .then(editorial => {
+            return editorial.createLibro({
+                isbn: "9788497932950",
+                titulo: "Las asombrosas aventuras de Kavalier y Clay",
+                genero: "Ficción",
+                ejemplares: 1,
+                idioma: "Castellano",
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+            });
+        })
         .catch(err => console.log(err));
 }
 

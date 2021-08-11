@@ -17,7 +17,8 @@ const Libro = sequelize.define('libro', {
         type: Sequelize.INTEGER,
         allowNull: false,
         default: 1
-    }
+    },
+    sinopsis: Sequelize.TEXT
 });
 
 module.exports = Libro;

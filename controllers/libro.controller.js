@@ -2,10 +2,16 @@ const Editorial = require('../models/editorial.model');
 const Libro = require('../models/libro.model');
 
 exports.getCatalogo = (req, res, next) => {
-    res.render("libros/catalogo", {
-        pageTitle: 'Catalogo',
-        path: '/libros/catalogo'
-    });
+    return Libro.findAll()
+        .then(libros => {
+            res.render("libros/catalogo", {
+                pageTitle: 'Catalogo',
+                path: '/libros/catalogo',
+                libros: libros
+            });
+        })
+        .catch(err => console.log(err));
+
 }
 
 exports.getLibros = (req, res, next) => {
