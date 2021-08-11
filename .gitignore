@@ -155,6 +155,6 @@ dist
 
 ### Configuration files ###
 # Ignore DB configuration file
-api/config/db.config.js
 util/db.config.js
+util/dbconfig.js
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,node
