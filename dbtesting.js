@@ -1,22 +1,91 @@
-const db = require('./util/db.config');
+const Sequelize = require('sequelize');
+const Autor = require('./models/autor.model');
+const Editorial = require('./models/editorial.model');
+const LibroAutor = require('./models/libro-autor.model');
 const Libro = require('./models/libro.model');
+const sequelize = require('./util/db.config');
 
-// db.execute("SELECT * FROM libro WHERE libro.isbn = 9780099470465").then(([result]) => {
-//     if (result.length > 0) {
-//         console.log("result");
-//     } else {
-//         console.log("no result");
-//     }
+// // establish DB relations
+// Libro.belongsTo(Editorial, {
+//     constraints: true,
+//     onDelete: 'CASCADE'
+// });
+// Editorial.hasMany(Libro);
+// Libro.belongsToMany(Autor, {
+//     through: LibroAutor
+// });
+// Autor.belongsToMany(Libro, {
+//     through: LibroAutor
 // });
 
-// Libro.getLibro('9780099470465').then(result => console.log(result));
+// sequelize.sync()
+//     .then(() => {
+//         return Editorial.bulkCreate([{
+//                 nombre: 'OReilly Media'
+//             },
+//             {
+//                 nombre: 'Editorial Universitaria Ramon Areces'
+//             },
+//             {
+//                 nombre: 'Booket'
+//             },
+//             {
+//                 nombre: 'Vintage Publishing'
+//             },
+//             {
+//                 nombre: 'DeBolsillo'
+//             },
 
-const libro = new Libro(
-    isbn = 'prueba', titulo = 'prueba', id_editorial = 1, genero = 'prueba', idioma = 'prueba', numero_paginas = 10, ejemplares = 1
-);
+//         ]);
+//     })
+//     .then(() => {
+//         return Autor.bulkCreate([{
+//                 nombre: 'Shyam',
+//                 apellidos: "Seshadri"
+//             },
+//             {
+//                 nombre: 'Eric A.',
+//                 apellidos: 'Meyer'
+//             },
+//             {
+//                 nombre: 'Jose Maria',
+//                 apellidos: 'Casas Sanchez'
+//             },
+//             {
+//                 nombre: 'Gianni',
+//                 apellidos: 'Rodari'
+//             },
+//             {
+//                 nombre: 'Joseph',
+//                 apellidos: 'Heller'
+//             },
+//             {
+//                 nombre: 'Michael',
+//                 apellidos: 'Chabon'
+//             },
+//         ]);
+//     })
+//     .catch(err => console.log(err))
 
-const libro2 = new Libro(
-    isbn = 'prueba', titulo = 'PRUEBA2', id_editorial = 2, genero = 'GENERO2', idioma = 'CLINGON2', numero_paginas = 1022, ejemplares = 2
-);
+// Editorial.create({
+//     nombre: 'prueba'
+// }).then(result => console.log(result.dataValues.id));
 
-Libro.addBook(libro).then(result => console.log(result));
+// Editorial.findByPk(6)
+//     .then(editorial => {
+//         return editorial.createLibro({
+//             isbn: 'prueba',
+//             titulo: 'prueba',
+//             genero: 'prueba',
+//             ejemplares: 1,
+//             idioma: 'prueba',
+//         });
+//     })
+//     .then(result => console.log(result))
+//     .catch(err => console.log(err));
+
+Libro.findByPk(undefined)
+    .then(result => {
+        if (result) console.log("result");
+        else console.log("no result");
+    });

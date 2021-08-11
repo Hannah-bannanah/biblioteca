@@ -1,0 +1,34 @@
+<%- include('../includes/head.ejs') %>
+<script src="/js/jquery.validate.min.js"></script>
+<!--vinculamos el plugin de jquery para que funcione la validación-->
+<script src="/js/registroEjemplar.js"></script>
+<!--Vinculamos la hoja donde añadiremos los scripts-->
+<%- include('../includes/header.ejs') %>
+<main>
+    <form action="<%= editing ? '/libros/editBook' : '/libros/registerBook'%>" method='post'>
+        <label for="titulo">T&iacute;tulo</label>
+        <input type="text" id='titulo' name='titulo' required autofocus value="<%= libro ? libro.titulo : '' %>"><br>
+
+        <label for="autorId">ID autor</label>
+        <input type="text" name="autorId" id="autorId" required><br>
+
+        <label for="editorialId">ID editorial</label>
+        <input type="text" name="editorialId" id="editorialId" required><br>
+
+        <label for="isbn">ISBN</label>
+        <input type="text" id="isbn" name="isbn" required value="<%= libro ? libro.isbn : '' %>"><br>
+
+        <label for="genero">G&eacute;nero</label>
+        <input type="text" name="genero" id="genero" required value="<%= libro ? libro.genero : '' %>"><br>
+
+        <label for="ejemplares">Número de ejemplares</label>
+        <input type="number" name="ejemplares" id="ejemplares" min="1" required
+            value="<%= libro ? libro.ejemplares : '' %>"><br>
+
+        <label for="idioma">Idioma</label>
+        <input type="text" name="idioma" id="idioma" required value="<%= libro ? libro.titulo : '' %>"><br>
+
+        <input type="submit" name="registrar" id="registrar" value="<%= editing ? 'Guardar' : 'Registrar' %>">
+    </form>
+
+    <%- include('../includes/footer.ejs') %>
