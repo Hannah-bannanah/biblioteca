@@ -7,9 +7,9 @@
         <li>G&eacute;nero: <%= libro.genero %></li>
         <li>Idioma: <%= libro.idioma %></li>
     </ul>
-    <a href="/libros/editBook/<%= libro.isbn %>">Edit</a>
+    <a href="/libros/editBook/<%= libro.isbn %>" class="btn">Edit</a>
     <form action="/libros/deleteBook" method='POST'>
-        <button type="submit">Delete</button>
+        <button class="btn" type="submit">Delete</button>
         <input type="hidden" name="isbn" value="<%= libro.isbn %>">
     </form>
 </main>

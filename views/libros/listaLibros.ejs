@@ -38,9 +38,9 @@
 
                 </tr>
             </table>
-            <a href="/libros/editBook/<%= libro.isbn %>">Edit</a>
+            <a class="btn" href="/libros/editBook/<%= libro.isbn %>">Edit</a>
             <form action="/libros/deleteBook" method='POST'>
-                <button type="submit">Delete</button>
+                <button class="btn" type="submit">Delete</button>
                 <input type="hidden" name="isbn" value="<%= libro.isbn %>">
             </form>
         </li>

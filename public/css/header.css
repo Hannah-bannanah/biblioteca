@@ -1,4 +1,5 @@
-header {
+/*Formato del header*/
+.header_grid {
     grid-area: header;
     height: 15vh;
     width: 100vw;
@@ -9,10 +10,69 @@ header {
     position: relative;
 }
 
-header h1 {
-    line-height: 15vh;
+.header_container {
+    display: inline-flex;
+    height: 15vh;
+    align-items: center;
 }
 
-header img {
-    width: 30px;
+.header_container img {
+    height: 90%;
+}
+
+.left_image {
+    float: left;
+    margin-left: 1%;
+}
+
+.right_image {
+    float: right;
+    margin-right: 1%;
+}
+
+.page_title {
+    font-size: 2em;
+}
+
+
+/*Formato de la barra de navegación*/
+.nav_grid {
+    grid-area: nav;
+    background-color: #3F72AF;
+    height: 40px;
+}
+
+.nav_menu {
+    list-style: none;
+    float: right;
+    height: 100%;
+    margin: 0;
+}
+
+.nav_menu_item {
+    float: left;
+    height: 100%;
+    line-height: 40px;
+}
+
+/*Formato de los links en la barra de navegación*/
+.nav_menu_item a {
+    color: #F9F7F7;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-variant: small-caps;
+    font-size: 18px;
+    line-height: 40px;
+    padding: 9px;
+}
+
+.nav_menu_item a:visited {
+    color: #F9F7F7;
+}
+
+.nav_menu_item a:focus,
+.nav_menu_item a:hover,
+.nav_menu_item a.active {
+    background-color: #DBE2EF;
+    color: #112D4E;
 }

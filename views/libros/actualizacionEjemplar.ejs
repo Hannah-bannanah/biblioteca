@@ -28,7 +28,8 @@
         <label for="idioma">Idioma</label>
         <input type="text" name="idioma" id="idioma" required value="<%= libro ? libro.titulo : '' %>"><br>
 
-        <input type="submit" name="registrar" id="registrar" value="<%= editing ? 'Guardar' : 'Registrar' %>">
+        <input type="submit" class="btn" name="registrar" id="registrar"
+            value="<%= editing ? 'Guardar' : 'Registrar' %>">
     </form>
 
     <%- include('../includes/footer.ejs') %>
