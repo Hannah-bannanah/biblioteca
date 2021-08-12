@@ -1,0 +1,33 @@
+/*Formato del footer*/
+/* footer {
+    grid-area: footer;
+    height: 10vh;
+    width: 100vw;
+    background-color: #112D4E;
+    color: #DBE2EF;
+    bottom: 0;
+    position: fixed;
+} */
+
+.footer_grid {
+    grid-area: header;
+    height: 15vh;
+    width: 100vw;
+    background-color: #112D4E;
+    color: #DBE2EF;
+    bottom: 0;
+    position: fixed;
+}
+
+
+.footer_grid p {
+    font-size: 12px;
+    text-align: center;
+}
+
+.footer_grid a,
+.footer_grid a:active,
+.footer_grid a:hover,
+.footer_grid a:visited {
+    color: #DBE2EF;
+}

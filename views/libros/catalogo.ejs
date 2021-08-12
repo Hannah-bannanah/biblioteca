@@ -6,12 +6,12 @@
 <script src="https://kit.fontawesome.com/ed5f92cabc.js" crossorigin="anonymous"></script>
 <script src="/js/catalogo.js"></script>
 <%- include('../includes/header.ejs') %>
-<main class="subgrid">
+<main class="main_grid">
     <% for (let libro of libros) { %>
     <article class="libro">
         <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
                 title="portada"></i></button>
-        <h3><%= libro.titulo %></h3>
+        <h4><%= libro.titulo %></h4>
         <p>Autor</p>
         <details>
             <summary>Sinopsis</summary>

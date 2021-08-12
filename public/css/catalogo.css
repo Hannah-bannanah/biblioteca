@@ -1,111 +1,8 @@
-/*Eliminar formato general*/
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-/*Establecer defaults para el body*/
-body {
-    font-family: 'Roboto', 'Roboto Condensed', sans-serif;
-    font-size: 10px;
-    background-color: #F9F7F7;
-    width: 100vw;
-    height: 100vh;
-}
-
-/*Eliminar formato de los botones*/
+/* Eliminar el formato de los botones*/
 button {
     background-color: inherit;
     border: none;
     color: inherit;
-}
-
-/*Grid de la página*/
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto 3fr auto;
-    grid-template-areas: "header header header header"
-        "nav nav nav nav"
-        "main main main main"
-        "footer footer footer footer";
-    grid-gap: 0;
-}
-
-/*Formato del header*/
-/* header {
-    grid-area: header;
-    height: 15vh;
-    width: 100vw;
-    background-color: #112D4E;
-    color: #DBE2EF;
-    font-size: 3em;
-    text-align: center;
-    position: relative;
-} */
-
-/*
-header h1 {
-    line-height: 15vh;
-}
-
-header img {
-    width: 30px; 
-}*/
-
-
-/*Formato de la barra de navegación*/
-nav {
-    grid-area: nav;
-    background-color: #3F72AF;
-    height: 40px;
-}
-
-
-
-.nav_menu {
-    list-style: none;
-    float: right;
-    height: 100%;
-}
-
-.nav_menu li {
-    float: left;
-    height: 100%;
-}
-
-/*Formato de los links en la barra de navegación*/
-.nav_menu a {
-    color: #F9F7F7;
-    text-decoration: none;
-    text-transform: capitalize;
-    font-variant: small-caps;
-    font-size: 18px;
-    line-height: 40px;
-    padding: 9px;
-}
-
-.nav_menu a:visited {
-    color: #F9F7F7;
-}
-
-.nav_menu a:focus,
-.nav_menu a:hover,
-.nav_menu a.active {
-    background-color: #DBE2EF;
-    color: #112D4E;
-}
-
-/*Formato del footer*/
-footer {
-    grid-area: footer;
-    height: 10vh;
-    width: 100vw;
-    background-color: #112D4E;
-    color: #DBE2EF;
-    bottom: 0;
-    position: fixed;
 }
 
 /*Formato de la sección de cookies*/
@@ -144,23 +41,23 @@ main {
 }
 
 /*Formato del subgrid de libros*/
-.subgrid {
+.main_grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1em;
     justify-items: center;
 }
 
-.subgrid>* {
+.main_grid>* {
     text-align: center;
 }
 
 /*Formato de cada libro*/
 .libro {
-    width: 200px;
+    /* width: 200px; */
     padding: 5%;
     color: #112D4E;
-    font-size: 1.2em;
+    /* font-size: 1.2em; */
 }
 
 .libro i:hover {
@@ -173,7 +70,7 @@ main {
     display: none;
     width: 40vw;
     top: 0;
-    bottom: 0;
+    bottom: 15vh;
     left: 30vw;
     overflow: auto;
     background-color: #DBE2EF;

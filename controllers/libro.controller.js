@@ -5,7 +5,7 @@ exports.getCatalogo = (req, res, next) => {
     return Libro.findAll()
         .then(libros => {
             res.render("libros/catalogo", {
-                pageTitle: 'Catalogo',
+                pageTitle: 'Catálogo',
                 path: '/libros/catalogo',
                 libros: libros
             });
@@ -19,7 +19,7 @@ exports.getLibros = (req, res, next) => {
         .then(libros => {
             res.render('libros/listaLibros', {
                 pageTitle: 'Lista de libros',
-                path: '/listaLibros',
+                path: '/libros/listaLibros',
                 libros: libros
             })
         })

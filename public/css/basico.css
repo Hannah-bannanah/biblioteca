@@ -1,0 +1,48 @@
+html {
+    width: 100vw;
+}
+
+/*Establecer defaults para el body*/
+body {
+    font-family: 'Roboto', 'Roboto Condensed', sans-serif;
+    font-size: 10px;
+    background-color: #F9F7F7;
+    width: 100vw;
+    height: 100vh;
+}
+
+main {
+    font-size: 1.5em;
+}
+
+.btn {
+    border-radius: 5px;
+    background-color: #112D4E;
+    border: solid 1px transparent;
+    color: #DBE2EF;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    padding: 1%;
+}
+
+.btn:hover {
+    border-radius: 5px;
+    background-color: #F9F7F7;
+    border: solid 3px #112D4E;
+    color: #112D4E;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    padding: 1%;
+}
+
+/*Grid de la página*/
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 3fr auto;
+    grid-template-areas: "header header header header"
+        "nav nav nav nav"
+        "main main main main"
+        "footer footer footer footer";
+    grid-gap: 0;
+}
