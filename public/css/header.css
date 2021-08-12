@@ -76,3 +76,8 @@
     background-color: #DBE2EF;
     color: #112D4E;
 }
+
+.search_box {
+    width: 60%;
+    margin-left: 3%;
+}
