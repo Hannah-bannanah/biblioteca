@@ -1,7 +1,7 @@
 class badRequest extends Error {
     constructor(errorCode, errorMessage, path, pageTitle) {
         super();
-        this.errorCode = 400;
+        this.errorCode = errorCode;
         this.name = this.constructor.name // good practice
         this.errorMessage = errorMessage;
         this.path = path;

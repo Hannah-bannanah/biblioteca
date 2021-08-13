@@ -8,11 +8,11 @@ exports.errorHandler = (err, req, res, next) => {
     if (res.headersSent) {
         return next(err)
     }
-    res.status(400)
+    res.status(err.errorCode)
     res.render('errors/generalError', {
         pageTitle: 'Bad Request',
         path: '/error',
-        errorCode: 400,
+        errorCode: err.errorCode,
         errorMessage: 'libro ya existe'
     });
     // return next(err);
