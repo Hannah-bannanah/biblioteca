@@ -36,14 +36,27 @@ exports.getLibro = (req, res, next) => {
             }
         })
         .then(libros => {
-            const libro = libros[0];
-            res.render('libros/detallesLibro', {
-                pageTitle: libro.titulo,
-                path: '/libros',
-                libro: libro
-            })
+            if (!libros[0]) {
+                throw new badRequest(404, 'libro no existe', '/error', 'Bad Request');
+            } else {
+                const libro = libros[0];
+                res.render('libros/detallesLibro', {
+                    pageTitle: libro.titulo,
+                    path: '/libros',
+                    libro: libro
+                });
+            }
+
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            res.render('errors/generalError', {
+                pageTitle: err.pageTitle,
+                path: err.path,
+                errorCode: err.errorCode,
+                errorMessage: err.errorMessage
+            });
+            next(err);
+        });
 }
 
 exports.getCreateLibro = (req, res, next) => {
@@ -63,6 +76,7 @@ exports.postCreateLibro = (req, res, next) => {
     const genero = req.body.genero;
     const idioma = req.body.idioma;
     const autorId = req.body.autorId;
+    const sinopsis = req.body.sinopsis;
     let newLibro;
     let fetchedAutor;
     let fetchedEditorial;
@@ -103,6 +117,7 @@ exports.postCreateLibro = (req, res, next) => {
                     genero: genero,
                     ejemplares: 1,
                     idioma: idioma,
+                    sinopsis: sinopsis,
                 });
             }
         })
@@ -158,28 +173,31 @@ exports.postEditLibro = (req, res, next) => {
     const idioma = req.body.idioma;
     const autor = req.body.autorId;
     const ejemplares = req.body.ejemplares;
+    const sinopsis = req.body.sinopsis;
+
     return Libro.findByPk(isbn)
         .then(libro => {
-            console.log("you are editing 1");
             if (!libro) {
-                console.log("you are editing 2");
-                return res.render('errors/generalError', {
-                    pageTitle: 'Bad Request',
-                    path: '/error',
-                    errorCode: 400,
-                    errorMessage: 'libro no existe'
-                });
+                throw new badRequest(400, 'Libro no existe', '/error', 'Bad Request');
             } else {
-                console.log('you are editing 3');
                 libro.titulo = titulo;
                 libro.genero = genero;
                 libro.idioma = idioma;
                 libro.ejemplares = ejemplares;
+                libro.sinopsis = sinopsis;
                 libro.save();
                 res.redirect(`/libros/${libro.isbn}`);
             };
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            res.render('errors/generalError', {
+                pageTitle: err.pageTitle,
+                path: err.path,
+                errorCode: err.errorCode,
+                errorMessage: err.errorMessage
+            });
+            next(err);
+        });
 }
 
 exports.postDeleteLibro = (req, res, next) => {

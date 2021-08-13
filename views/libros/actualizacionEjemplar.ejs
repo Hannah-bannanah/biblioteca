@@ -28,6 +28,10 @@
         <label for="idioma">Idioma</label>
         <input type="text" name="idioma" id="idioma" required value="<%= libro ? libro.titulo : '' %>"><br>
 
+        <label for="sinopsis">Sinopsis</label>
+        <textarea name="sinopsis" id="sinopsis" cols="50"
+            rows="7"><%= libro ? libro.sinopsis : 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis eaque quaerat consequuntur totam illum obcaecati laboriosam, quidem cum! Perspiciatis, in.' %>"</textarea>
+
         <input type="submit" class="btn" name="registrar" id="registrar"
             value="<%= editing ? 'Guardar' : 'Registrar' %>">
     </form>

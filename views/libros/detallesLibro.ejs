@@ -6,6 +6,7 @@
     <ul>
         <li>G&eacute;nero: <%= libro.genero %></li>
         <li>Idioma: <%= libro.idioma %></li>
+        <li>Sinopsis: <%= libro.sinopsis %></li>
     </ul>
     <a href="/libros/editBook/<%= libro.isbn %>" class="btn">Edit</a>
     <form action="/libros/deleteBook" method='POST'>
