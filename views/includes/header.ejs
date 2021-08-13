@@ -17,19 +17,30 @@
     <nav class="nav_grid">
         <ul class="nav_menu">
             <li class="nav_menu_item"><a href="/" class="<%= path === '/' ? 'active' : '' %>">Home</a></li>
-            <li class="nav_menu_item"><a href="#"
+            <!-- <li class="nav_menu_item"><a href="#"
                     class="<%= path === '/api/socio/registerSocio' ? 'active' : '' %>">Ingresar/Registrar</a>
-            </li> <!-- TODO update path to remove /api -->
+            </li> -->
             <li class="nav_menu_item"><a href="/libros"
                     class="<%= path === '/libros/catalogo' ? 'active' : '' %>">Catálogo</a>
             </li>
-            <li class="nav_menu_item"><a href="/libros/registerBook"
-                    class="<%= path === '/libros/registerBook' ? 'active' : '' %>">A&ntilde;adir
-                    libro</a></li>
-            <li class="nav_menu_item"><a href="/libros/listaLibros"
-                    class="<%= path === '/libros/listaLibros' ? 'active' : '' %>">Lista de
-                    libros</a></li>
-            <li class="nav_menu_item"><input class="search_box" type="search" name="busqueda"> <input type="submit"
-                    value="Buscar"> </li>
+            <li class="nav_menu_item">
+                <!-- <a href="#"
+                    class="<%= path === '/libros/listaLibros' || path === '/libros/registerBook' || path === '/libros/editBook' ? 'active' : '' %>">Administrar
+                    Libros</a> -->
+                <button id="toggleNavButton" onclick="toggleSubmenu()">Administrar libros</button>
+                <ul class="nav_submenu" id="nav_submenu">
+                    <li class="nav_submenu_item"><a href="/libros/listaLibros"
+                            class="<%= path === '/libros/listaLibros' ? 'active' : '' %>">Lista de
+                            libros</a></li>
+                    <li class="nav_submenu_item"><a href="/libros/registerBook"
+                            class="<%= path === '/libros/registerBook' ? 'active' : '' %>">A&ntilde;adir
+                            libro</a></li>
+                    <li class="nav_submenu_item"><a href="/libros/editBook"
+                            class="<%= path === '/libros/editBook' ? 'active' : '' %>">Editar
+                            libro</a></li>
+                </ul>
+            </li>
+            <li class="nav_menu_item"><input class="search_box" type="search" name="busqueda"
+                    placeholder="no operativo"> <input type="submit" value="Buscar"> </li>
         </ul>
     </nav>
