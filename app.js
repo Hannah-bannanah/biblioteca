@@ -64,7 +64,10 @@ app.get("/", (req, res, next) => {
     });
 });
 
-//default route
+//if errors
+app.use(errorController.errorHandler);
+
+// default route
 app.use(errorController.error);
 
 // initialize DB & server

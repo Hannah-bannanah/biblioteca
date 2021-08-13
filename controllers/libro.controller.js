@@ -1,5 +1,8 @@
 const Editorial = require('../models/editorial.model');
 const Libro = require('../models/libro.model');
+const Autor = require('../models/autor.model');
+const badRequest = require('../util/customErrors');
+const LibroAutor = require('../models/libro-autor.model');
 
 exports.getCatalogo = (req, res, next) => {
     return Libro.findAll()
@@ -59,54 +62,78 @@ exports.postCreateLibro = (req, res, next) => {
     const editorialId = req.body.editorialId;
     const genero = req.body.genero;
     const idioma = req.body.idioma;
-    const autor = req.body.autorId;
+    const autorId = req.body.autorId;
+    let newLibro;
+    let fetchedAutor;
+    let fetchedEditorial;
     return Libro.findByPk(isbn)
         .then(libro => {
+            // console.log("looked for libro by pk (1)");
             if (libro) {
-                return res.render('errors/generalError', {
+                let err = {
                     pageTitle: 'Bad Request',
                     path: '/error',
                     errorCode: 400,
                     errorMessage: 'libro ya existe'
-                });
+                };
+                throw new badRequest(400, 'Libro ya existe', '/error', 'Bad Request');
             } else {
                 return Editorial.findByPk(editorialId);
             }
         })
         .then(editorial => {
-            // console.log(editorial);
             if (!editorial) {
-                return res.render('errors/generalError', {
-                    pageTitle: 'Bad Request',
-                    path: '/error',
-                    errorCode: 400,
-                    errorMessage: 'editorial no existe'
+                throw new badRequest(400, 'Editorial no existe', '/error', 'Bad Request');
+            } else {
+                fetchedEditorial = editorial;
+                // console.log("editorial:", fetchedEditorial);
+                return Autor.findByPk(autorId);
+            }
+
+        })
+        .then(autor => {
+            console.log('looked for autor by pk (3)')
+            if (!autor) {
+                throw new badRequest(400, 'Autor no existe', '/error', 'Bad Request');
+            } else {
+                fetchedAutor = autor;
+                return fetchedEditorial.createLibro({
+                    isbn: isbn,
+                    titulo: titulo,
+                    genero: genero,
+                    ejemplares: 1,
+                    idioma: idioma,
                 });
             }
-            return editorial.createLibro({
-                isbn: isbn,
-                titulo: titulo,
-                genero: genero,
-                ejemplares: 1,
-                idioma: idioma,
-            });
         })
         .then(result => {
-            // console.log(result);
             return Libro.findByPk(result.dataValues.isbn);
         })
         .then(libro => {
-            res.redirect(`/libros/${libro.isbn}`);
+            console.log('looked for the libro we just created (5)')
+            newLibro = libro;
+            return newLibro.addAutor(fetchedAutor);
         })
-        .catch(err => console.log(err));
+        .then(() => {
+            console.log("added record to libroAutor? (6)")
+            res.redirect(`/libros/${newLibro.isbn}`);
+        })
+        .catch(err => {
+            res.render('errors/generalError', {
+                pageTitle: err.pageTitle,
+                path: err.path,
+                errorCode: err.errorCode,
+                errorMessage: err.errorMessage
+            });
+            next(err);
+        });
 }
+
 
 exports.getEditLibro = (req, res, next) => {
     const isbn = req.params.isbn;
-    // console.log("isbn: ", isbn)
     return Libro.findByPk(isbn)
         .then(libro => {
-            // console.log("getEditLibro para: ", libro);
             if (libro) return libro;
             else return false;
         })
@@ -157,19 +184,33 @@ exports.postEditLibro = (req, res, next) => {
 
 exports.postDeleteLibro = (req, res, next) => {
     const isbn = req.body.isbn;
+    let fetchedLibro;
     return Libro.findByPk(isbn)
         .then(libro => {
             if (!libro) {
-                res.render('errors/generalError', {
-                    pageTitle: 'Bad Request',
-                    path: '/error',
-                    errorCode: 400,
-                    errorMessage: 'libro no existe'
-                });
+                throw new badRequest(400, 'Libro no existe', '/error', 'Bad Request')
             } else {
-                libro.destroy();
-                res.redirect('/libros/listalibros')
+                fetchedLibro = libro
+                return LibroAutor.destroy({
+                    where: {
+                        libroIsbn: isbn
+                    }
+                });
+                // libro.destroy();
+                // res.redirect('/libros/listalibros')
             }
         })
-        .catch(err => console.log(err));
+        .then(() => {
+            fetchedLibro.destroy();
+            res.redirect('/libros/listaLibros');
+        })
+        .catch(err => {
+            res.render('errors/generalError', {
+                pageTitle: err.pageTitle,
+                path: err.path,
+                errorCode: err.errorCode,
+                errorMessage: err.errorMessage
+            });
+            next(err);
+        });
 }
