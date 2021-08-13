@@ -6,7 +6,6 @@ const path = require('path');
 // import internal modules
 const errorController = require('./controllers/error.controller');
 const librosRouter = require('./routes/libro.route');
-const sociosRouter = require('./api/routes/socio.route');
 
 // import DB modules
 const sequelize = require('./util/db.config');
@@ -46,7 +45,6 @@ app.set('views', 'views'); //set up the views folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use("/api/socios", sociosRouter);
 // app.use("/api", require('./api'));
 app.use("/libros", librosRouter);
 
