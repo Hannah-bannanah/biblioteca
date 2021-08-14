@@ -5,21 +5,30 @@
     <h1>Lista de todos los libros</h1>
     <% if (libros.length > 0) { %>
     <ul>
-        <% for (let libro of libros) { %>
+        <% for (let libro of libros) { 
+            const autores = [];
+            libro.autors.forEach(autor => {
+                autores.push(autor.nombre + ' ' + autor.apellidos);
+            });
+        %>
         <li>
             <table>
                 <tr>
-                    <th>isbn</th>
+                    <th>isbn: </th>
                     <td><%= libro.isbn %></td>
                 </tr>
                 <tr>
-                    <th>titulo</th>
+                    <th>titulo: </th>
                     <td><%= libro.titulo %></td>
 
                 </tr>
                 <tr>
-                    <th>editorial</th>
-                    <td>Editorial</td>
+                    <th>autor(es): </th>
+                    <td><%= autores.join(', ') %></td>
+                </tr>
+                <tr>
+                    <th>editorial: </th>
+                    <td><%= libro.editorial.nombre %></td>
 
                 </tr>
                 <tr>
@@ -28,12 +37,12 @@
 
                 </tr>
                 <tr>
-                    <th>ejemplares</th>
+                    <th>ejemplares: </th>
                     <td><%= libro.ejemplares %></td>
 
                 </tr>
                 <tr>
-                    <th>idioma</th>
+                    <th>idioma: </th>
                     <td><%= libro.idioma %></td>
 
                 </tr>

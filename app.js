@@ -12,7 +12,6 @@ const sequelize = require('./util/db.config');
 const Libro = require('./models/libro.model');
 const Editorial = require('./models/editorial.model');
 const Autor = require('./models/autor.model');
-const LibroAutor = require('./models/libro-autor.model');
 
 // establish DB relations
 Libro.belongsTo(Editorial, {
@@ -20,11 +19,12 @@ Libro.belongsTo(Editorial, {
     onDelete: 'CASCADE'
 });
 Editorial.hasMany(Libro);
+
 Libro.belongsToMany(Autor, {
-    through: LibroAutor
+    through: 'libroAutor'
 });
 Autor.belongsToMany(Libro, {
-    through: LibroAutor
+    through: 'libroAutor'
 });
 
 // initialize app
@@ -81,9 +81,7 @@ sequelize.sync()
             return editorial;
         }
     })
-    .then((result) => {
-        // console.log(result);
-        // listen on port
+    .then(() => {
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     })
     .catch(err => console.log(err))
