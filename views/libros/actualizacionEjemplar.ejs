@@ -10,10 +10,11 @@
         <input type="text" id='titulo' name='titulo' required autofocus value="<%= libro ? libro.titulo : '' %>"><br>
 
         <label for="autorId">ID autor</label>
-        <input type="text" name="autorId" id="autorId" required><br>
+        <input type="text" name="autorId" id="autorId" required placeholder="<%= editing ? 'no operativo' : '' %>"><br>
 
         <label for="editorialId">ID editorial</label>
-        <input type="text" name="editorialId" id="editorialId" required><br>
+        <input type="text" name="editorialId" id="editorialId" required
+            placeholder="<%= editing ? 'no operativo' : '' %>"><br>
 
         <label for="isbn">ISBN</label>
         <input type="text" id="isbn" name="isbn" required value="<%= libro ? libro.isbn : '' %>"><br>
@@ -27,6 +28,9 @@
 
         <label for="idioma">Idioma</label>
         <input type="text" name="idioma" id="idioma" required value="<%= libro ? libro.titulo : '' %>"><br>
+
+        <label for="portada">Url de la portada</label>
+        <input type="text" name="portada" id="portada" value="<%= libro ? libro.coverUrl : '' %>"><br>
 
         <label for="sinopsis">Sinopsis</label>
         <textarea name="sinopsis" id="sinopsis" cols="50"

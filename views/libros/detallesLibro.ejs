@@ -7,6 +7,13 @@
         <li>G&eacute;nero: <%= libro.genero %></li>
         <li>Idioma: <%= libro.idioma %></li>
         <li>Sinopsis: <%= libro.sinopsis %></li>
+        <% 
+        const autores = [];
+        for (let autor of libro.autors) {
+            autores.push(autor.nombre + ' ' + autor.apellidos);
+        } %>
+        <li>Autor(es): <%= autores.join(', ') %></li>
+        <li>Editorial: <%= libro.editorial.nombre %></li>
     </ul>
     <a href="/libros/editBook/<%= libro.isbn %>" class="btn">Edit</a>
     <form action="/libros/deleteBook" method='POST'>

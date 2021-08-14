@@ -1,9 +1,8 @@
-const Sequelize = require('sequelize');
+// const Sequelize = require('sequelize');
 const Autor = require('../models/autor.model');
 const Editorial = require('../models/editorial.model');
-const LibroAutor = require('../models/libro-autor.model');
 const Libro = require('../models/libro.model');
-const sequelize = require('../util/db.config');
+// const sequelize = require('../util/db.config');
 
 // establish DB relations
 Libro.belongsTo(Editorial, {
@@ -12,10 +11,10 @@ Libro.belongsTo(Editorial, {
 });
 Editorial.hasMany(Libro);
 Libro.belongsToMany(Autor, {
-    through: LibroAutor
+    through: 'libroAutor'
 });
 Autor.belongsToMany(Libro, {
-    through: LibroAutor
+    through: 'libroAutor'
 });
 
 const fillDB = () => {

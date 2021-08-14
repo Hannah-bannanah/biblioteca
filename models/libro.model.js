@@ -18,7 +18,8 @@ const Libro = sequelize.define('libro', {
         allowNull: false,
         default: 1
     },
-    sinopsis: Sequelize.TEXT
+    sinopsis: Sequelize.TEXT,
+    coverUrl: Sequelize.STRING
 });
 
 module.exports = Libro;

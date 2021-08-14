@@ -2,10 +2,15 @@ const Editorial = require('../models/editorial.model');
 const Libro = require('../models/libro.model');
 const Autor = require('../models/autor.model');
 const badRequest = require('../util/customErrors');
-const LibroAutor = require('../models/libro-autor.model');
 
 exports.getCatalogo = (req, res, next) => {
-    return Libro.findAll()
+    return Libro.findAll({
+            include: [{
+                model: Autor,
+            }, {
+                model: Editorial
+            }]
+        })
         .then(libros => {
             res.render("libros/catalogo", {
                 pageTitle: 'Catálogo',
@@ -18,7 +23,13 @@ exports.getCatalogo = (req, res, next) => {
 }
 
 exports.getLibros = (req, res, next) => {
-    return Libro.findAll()
+    return Libro.findAll({
+            include: [{
+                model: Autor,
+            }, {
+                model: Editorial
+            }]
+        })
         .then(libros => {
             res.render('libros/listaLibros', {
                 pageTitle: 'Lista de libros',
@@ -30,16 +41,17 @@ exports.getLibros = (req, res, next) => {
 }
 
 exports.getLibro = (req, res, next) => {
-    return Libro.findAll({
-            where: {
-                isbn: req.params.isbn
-            }
+    return Libro.findByPk(req.params.isbn, {
+            include: [{
+                model: Autor,
+            }, {
+                model: Editorial
+            }]
         })
-        .then(libros => {
-            if (!libros[0]) {
+        .then(libro => {
+            if (!libro) {
                 throw new badRequest(404, 'libro no existe', '/error', 'Bad Request');
             } else {
-                const libro = libros[0];
                 res.render('libros/detallesLibro', {
                     pageTitle: libro.titulo,
                     path: '/libros',
@@ -77,6 +89,7 @@ exports.postCreateLibro = (req, res, next) => {
     const idioma = req.body.idioma;
     const autorId = req.body.autorId;
     const sinopsis = req.body.sinopsis;
+    const coverUrl = req.body.portada !== '' ? req.body.portada : null;
     let newLibro;
     let fetchedAutor;
     let fetchedEditorial;
@@ -118,6 +131,7 @@ exports.postCreateLibro = (req, res, next) => {
                     ejemplares: 1,
                     idioma: idioma,
                     sinopsis: sinopsis,
+                    coverUrl: coverUrl,
                 });
             }
         })
@@ -174,6 +188,7 @@ exports.postEditLibro = (req, res, next) => {
     const autor = req.body.autorId;
     const ejemplares = req.body.ejemplares;
     const sinopsis = req.body.sinopsis;
+    const coverUrl = req.body.portada !== '' ? req.body.portada : null;
 
     return Libro.findByPk(isbn)
         .then(libro => {
@@ -185,6 +200,7 @@ exports.postEditLibro = (req, res, next) => {
                 libro.idioma = idioma;
                 libro.ejemplares = ejemplares;
                 libro.sinopsis = sinopsis;
+                libro.coverUrl = coverUrl;
                 libro.save();
                 res.redirect(`/libros/${libro.isbn}`);
             };

@@ -7,12 +7,25 @@
 <script src="/js/catalogo.js"></script>
 <%- include('../includes/header.ejs') %>
 <main class="main_grid">
-    <% for (let libro of libros) { %>
+    <% 
+    for (let libro of libros) { 
+        const portada = libro.coverUrl;
+        const autores = []; 
+        for (let autor of libro.autors) {
+            autores.push(autor.nombre + ' ' + autor.apellidos); 
+        } 
+        autores_libro = autores.join(', ');
+    %>
     <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()"><i class="fas fa-book fa-8x"
-                title="portada"></i></button>
+        <button class="abrir-carrousel" onclick="abrirCarrousel()">
+            <% if (portada) { %>
+            <img src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
+            <% } else { %>
+            <i class="fas fa-book fa-8x" title="portada"></i>
+            <% } %>
+        </button>
         <h4><%= libro.titulo %></h4>
-        <p>Autor</p>
+        <p><%= autores_libro %></p>
         <details>
             <summary>Sinopsis</summary>
             <%= libro.sinopsis %>
@@ -26,11 +39,18 @@
                 title="libro anterior"></i></button>
         <button id="next-book" onclick="siguienteLibro(1)"><i class="fa fa-chevron-right fa-3x" aria-hidden="true"
                 title="libro siguiente"></i></button>
-        <% for (let libro of libros) { %>
+        <% 
+        for (let libro of libros) { 
+            const autores = []; 
+            for (let autor of libro.autors) {
+                autores.push(autor.nombre + ' ' + autor.apellidos); 
+        } 
+        autores_libro = autores.join(', ');
+        %>
         <article class="libro carrousel slide">
             <i class="fas fa-book fa-8x"></i>
             <h3><%= libro.titulo %></h3>
-            <p>Autor</p>
+            <p><%= autores_libro %></p>
             <details>
                 <summary>Sinopsis</summary>
                 <%= libro.sinopsis %>
@@ -42,12 +62,12 @@
                         <td><%= libro.genero %></td>
                     </tr>
                     <tr>
-                        <th>Autor</th>
-                        <td>autor</td>
+                        <th>Autor(es)</th>
+                        <td><%= autores_libro %></td>
                     </tr>
                     <tr>
                         <th>Editorial</th>
-                        <td>‎ editorial</td>
+                        <td>‎<%= libro.editorial.nombre %></td>
                     </tr>
                     <tr>
                         <th>ISBN</th>
