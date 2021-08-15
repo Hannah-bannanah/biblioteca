@@ -9,9 +9,9 @@ const librosRouter = require('./routes/libro.route');
 
 // import DB modules
 const sequelize = require('./util/db.config');
-const Libro = require('./models/libro.model');
-const Editorial = require('./models/editorial.model');
-const Autor = require('./models/autor.model');
+const Libro = require('./models/libro.schema');
+const Editorial = require('./models/editorial.schema');
+const Autor = require('./models/autor.schema');
 
 // establish DB relations
 Libro.belongsTo(Editorial, {
