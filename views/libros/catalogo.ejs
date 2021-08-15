@@ -8,6 +8,7 @@
 <%- include('../includes/header.ejs') %>
 <main class="main_grid">
     <% 
+    let idxLibro = 0;
     for (let libro of libros) { 
         const portada = libro.coverUrl;
         const autores = []; 
@@ -17,7 +18,7 @@
         autores_libro = autores.join(', ');
     %>
     <article class="libro">
-        <button class="abrir-carrousel" onclick="abrirCarrousel()">
+        <button class="abrir-carrousel" onclick="abrirCarrousel(<%= idxLibro %>)">
             <% if (portada) { %>
             <img src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
             <% } else { %>
@@ -31,7 +32,9 @@
             <%= libro.sinopsis %>
         </details>
     </article>
-    <% } %>
+    <% 
+    idxLibro ++;
+} %>
     <section id="carrousel-libros" class="modal-box">
         <button id="cerrar-carrousel" onclick="cerrarParent('cerrar-carrousel')"><i class="far fa-times-circle fa-3x"
                 title="cerrar carrousel"></i></button>
@@ -40,15 +43,22 @@
         <button id="next-book" onclick="siguienteLibro(1)"><i class="fa fa-chevron-right fa-3x" aria-hidden="true"
                 title="libro siguiente"></i></button>
         <% 
+        idxLibro = 0;
         for (let libro of libros) { 
             const autores = []; 
+            const portada = libro.coverUrl;
             for (let autor of libro.autors) {
                 autores.push(autor.nombre + ' ' + autor.apellidos); 
         } 
         autores_libro = autores.join(', ');
         %>
-        <article class="libro carrousel slide">
-            <i class="fas fa-book fa-8x"></i>
+        <article class="libro carrousel slide" id="<%= 'fichaLibro' + idxLibro %>">
+            <!-- <i class="fas fa-book fa-8x"></i> -->
+            <% if (portada) { %>
+            <img src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
+            <% } else { %>
+            <i class="fas fa-book fa-8x" title="portada"></i>
+            <% } %>
             <h3><%= libro.titulo %></h3>
             <p><%= autores_libro %></p>
             <details>
@@ -76,7 +86,8 @@
                 </tbody>
             </table>
         </article>
-        <% } %>
+        <% idxLibro ++;
+    } %>
     </section>
 </main>
 <!-- <aside id="aside-cookies">
