@@ -1,7 +1,7 @@
 // const Sequelize = require('sequelize');
-const Autor = require('../models/autor.model');
-const Editorial = require('../models/editorial.model');
-const Libro = require('../models/libro.model');
+const Autor = require('../models/autor.schema');
+const Editorial = require('../models/editorial.schema');
+const Libro = require('../models/libro.schema');
 // const sequelize = require('../util/db.config');
 
 // establish DB relations

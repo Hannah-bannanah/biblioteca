@@ -10,11 +10,11 @@
         <input type="text" id='titulo' name='titulo' required autofocus value="<%= libro ? libro.titulo : '' %>"><br>
 
         <label for="autorId">ID autor</label>
-        <input type="text" name="autorId" id="autorId" required placeholder="<%= editing ? 'no operativo' : '' %>"><br>
+        <input type="text" name="autorId" id="autorId" required value="<%= libro ? libro.autors[0].id : '' %>"><br>
 
         <label for="editorialId">ID editorial</label>
         <input type="text" name="editorialId" id="editorialId" required
-            placeholder="<%= editing ? 'no operativo' : '' %>"><br>
+            value="<%= libro ? libro.editorial.id : '' %>"><br>
 
         <label for="isbn">ISBN</label>
         <input type="text" id="isbn" name="isbn" required value="<%= libro ? libro.isbn : '' %>"><br>
