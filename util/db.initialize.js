@@ -11,10 +11,10 @@ Libro.belongsTo(Editorial, {
 });
 Editorial.hasMany(Libro);
 Libro.belongsToMany(Autor, {
-    through: 'libroAutor'
+    through: 'libroAutors'
 });
 Autor.belongsToMany(Libro, {
-    through: 'libroAutor'
+    through: 'libroAutors'
 });
 
 const fillDB = () => {
@@ -74,7 +74,7 @@ const fillDB = () => {
                 genero: "Informática",
                 ejemplares: 1,
                 idioma: "Inglés",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
             });
         })
         .then(() => {
@@ -87,7 +87,8 @@ const fillDB = () => {
                 genero: "Informática",
                 ejemplares: 1,
                 idioma: "Inglés",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
+                coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2zv9n9-JWWHJ8uLwDx9Ye3gTplrIHzzvZERuwQFEm0xJ0dkev2pg2qfWBHWE&usqp=CAc"
             });
         })
         .then(() => {
@@ -100,7 +101,8 @@ const fillDB = () => {
                 genero: "Estadística",
                 ejemplares: 1,
                 idioma: "Castellano",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
+                coverUrl: ""
             });
         })
         .then(() => {
@@ -113,7 +115,8 @@ const fillDB = () => {
                 genero: "Psicología",
                 ejemplares: 1,
                 idioma: "Castellano",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
+                coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC2MQy-UurJhSjPPu-xZkvPwEYJVp4kSHfeI9cQXrp0PV6FPv-rXKbIT1jmFB9e0bD23UaA2c&usqp=CAc"
             });
         })
         .then(() => {
@@ -126,7 +129,8 @@ const fillDB = () => {
                 genero: "Comedia",
                 ejemplares: 1,
                 idioma: "Inglés",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
+                coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROhqd1Ln5Ldkr3-WU2fvjzwF14NLURNVqayQ&usqp=CAU"
             });
         })
         .then(() => {
@@ -139,7 +143,8 @@ const fillDB = () => {
                 genero: "Ficción",
                 ejemplares: 1,
                 idioma: "Castellano",
-                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?"
+                sinopsis: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam saepe temporibus a, consectetur iure eum! Illum architecto inventore sint labore?",
+                coverUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuWa8c3-BWzc_OxJsINQiTV6MeDy7RAbNWlwaiva0xqaScXfH43phsjr1W5jb5F0tFg6dVMI0&usqp=CAc"
             });
         })
         .catch(err => console.log(err));
