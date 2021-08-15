@@ -9,4 +9,4 @@ github: Hannah-bannanah/biblioteca
 ## Requisitos
 - nodejs/npm
 - modulos listados en el archivo package.json
-- creación de un archivo db.config.js con los detalles de la conexión a la BBDD
+- actualización del archivo db.config.js con los detalles de la conexión a la BBDD
