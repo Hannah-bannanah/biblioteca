@@ -20,7 +20,7 @@
     <article class="libro">
         <button class="abrir-carrousel" onclick="abrirCarrousel(<%= idxLibro %>)">
             <% if (portada) { %>
-            <img src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
+            <img class="img-portada" src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
             <% } else { %>
             <i class="fas fa-book fa-8x" title="portada"></i>
             <% } %>
@@ -55,7 +55,7 @@
         <article class="libro carrousel slide" id="<%= 'fichaLibro' + idxLibro %>">
             <!-- <i class="fas fa-book fa-8x"></i> -->
             <% if (portada) { %>
-            <img src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
+            <img class="img-portada" src="<%= portada %>" alt="portada de '<%= libro.titulo %>'">
             <% } else { %>
             <i class="fas fa-book fa-8x" title="portada"></i>
             <% } %>

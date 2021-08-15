@@ -21,10 +21,10 @@ Libro.belongsTo(Editorial, {
 Editorial.hasMany(Libro);
 
 Libro.belongsToMany(Autor, {
-    through: 'libroAutor'
+    through: 'libroAutors'
 });
 Autor.belongsToMany(Libro, {
-    through: 'libroAutor'
+    through: 'libroAutors'
 });
 
 // initialize app
